@@ -6,15 +6,6 @@ import { company, nav } from '../data/site';
 <header class="site-header" data-header>
   <div class="container bar">
     <a href="#top" class="brand" aria-label={`${company.name} home`}>
-      <img
-        src="/brand/logo-mark-2x.png"
-        srcset="/brand/logo-mark-1x.png 1x, /brand/logo-mark-2x.png 2x, /brand/logo-mark-3x.png 3x"
-        alt=""
-        width="113"
-        height="72"
-        class="brand-logo"
-        fetchpriority="high"
-      />
       <span class="brand-text">
         <span class="brand-name">Vijay Innovation <span>Technology</span></span>
         <span class="brand-tag">{company.tagline}</span>
@@ -84,12 +75,6 @@ import { company, nav } from '../data/site';
     min-width: 0;
   }
 
-  .brand-logo {
-    width: auto;
-    height: 72px;
-    flex: none;
-  }
-
   .brand-text {
     display: grid;
     line-height: 1.15;
@@ -99,7 +84,7 @@ import { company, nav } from '../data/site';
   .brand-name {
     font-family: var(--font-head);
     font-weight: 800;
-    font-size: 1rem;
+    font-size: 1.15rem;
     white-space: nowrap;
   }
 
@@ -217,24 +202,15 @@ import { company, nav } from '../data/site';
     }
   }
 
-  @media (max-width: 640px) {
-    .brand-logo {
-      height: 56px;
-    }
-  }
-
   @media (max-width: 420px) {
     .brand-tag {
       display: none;
     }
 
     .brand-name {
-      font-size: 0.92rem;
+      font-size: 1rem;
     }
 
-    .brand-name span {
-      display: none;
-    }
   }
 </style>
 
