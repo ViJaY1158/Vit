@@ -30,12 +30,6 @@ import msmeCert from '../assets/cert-msme.jpg';
 const machineImages = { rdx20, vl1200, vl1050 };
 const certImages = { iso: isoCert, msme: msmeCert };
 
-// Hero photo is served from Unsplash's image CDN, resized per screen width.
-const heroBase =
-  'https://images.unsplash.com/photo-1565043589221-5239c9de792e?auto=format&fit=crop&q=60&w=';
-const heroWidths = [640, 960, 1280, 1600, 2000];
-const heroSrcset = heroWidths.map((w) => `${heroBase}${w} ${w}w`).join(', ');
-
 const year = new Date().getFullYear();
 ---
 
@@ -49,17 +43,7 @@ const year = new Date().getFullYear();
   <main id="main">
     <!-- ===== Hero ===== -->
     <section class="hero" aria-labelledby="hero-title">
-      <img
-        class="hero-bg"
-        src={`${heroBase}1600`}
-        srcset={heroSrcset}
-        sizes="100vw"
-        alt=""
-        width="1600"
-        height="1067"
-        fetchpriority="high"
-        decoding="async"
-      />
+      <div class="hero-grid" aria-hidden="true"></div>
       <div class="container hero-inner">
         <div class="hero-copy">
           <p class="hero-kicker animate-in">
@@ -81,14 +65,26 @@ const year = new Date().getFullYear();
             <a href="#machines" class="btn btn--ghost">See our machines</a>
           </div>
         </div>
-        <Image
-          src={makeInIndia}
-          alt="Make in India"
-          width={240}
-          class="hero-mii animate-in"
-          style="--delay:480ms"
-          loading="eager"
-        />
+        <div class="hero-visual animate-in" style="--delay:200ms">
+          <Image
+            src={logo}
+            alt={`${company.name} logo`}
+            widths={[320, 480, 640, 960]}
+            sizes="(max-width: 640px) 240px, (max-width: 1100px) 340px, 460px"
+            quality={95}
+            loading="eager"
+            fetchpriority="high"
+            class="hero-logo"
+          />
+          <Image
+            src={makeInIndia}
+            alt="Make in India"
+            widths={[180, 360]}
+            sizes="180px"
+            class="hero-mii"
+            loading="eager"
+          />
+        </div>
       </div>
     </section>
 
@@ -465,7 +461,7 @@ const year = new Date().getFullYear();
     <div class="container footer-grid">
       <div class="footer-about">
         <div class="footer-brand">
-          <Image src={logo} alt="" width={80} densities={[1, 2]} />
+          <Image src={logo} alt="" width={76} densities={[1, 2, 3]} quality={95} />
           <div>
             <strong>{company.name}</strong>
             <span>Since {company.since}</span>
@@ -577,30 +573,52 @@ const year = new Date().getFullYear();
     overflow: hidden;
   }
 
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero::after {
+  /* Engineering-drawing grid behind the hero, drawn with CSS (no image download). */
+  .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    z-index: -1;
+    z-index: -2;
     background:
-      linear-gradient(100deg, rgb(7 20 38 / 94%) 0%, rgb(7 20 38 / 80%) 45%, rgb(11 31 58 / 45%) 100%),
-      linear-gradient(0deg, rgb(7 20 38 / 70%), transparent 40%);
+      radial-gradient(900px 600px at 78% 45%, rgb(29 95 209 / 32%), transparent 65%),
+      radial-gradient(700px 500px at 0% 100%, rgb(212 160 23 / 10%), transparent 60%),
+      linear-gradient(160deg, #0b1f3a 0%, #071426 60%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgb(255 255 255 / 5%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 5%) 1px, transparent 1px),
+      linear-gradient(rgb(255 255 255 / 2.5%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 2.5%) 1px, transparent 1px);
+    background-size:
+      96px 96px,
+      96px 96px,
+      24px 24px,
+      24px 24px;
+    mask-image: radial-gradient(ellipse 80% 70% at 60% 45%, #000 30%, transparent 85%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 60% 45%, #000 30%, transparent 85%);
   }
 
   .hero-inner {
     display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: end;
-    gap: 2rem;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .hero-visual {
+    position: relative;
+    display: grid;
+    justify-items: center;
+  }
+
+  .hero-logo {
+    width: min(100%, 460px);
+    height: auto;
   }
 
   .hero-copy {
@@ -651,9 +669,11 @@ const year = new Date().getFullYear();
   }
 
   .hero-mii {
-    width: clamp(120px, 18vw, 220px);
+    position: absolute;
+    left: 0;
+    bottom: -1rem;
+    width: clamp(110px, 12vw, 160px);
     height: auto;
-    filter: drop-shadow(0 6px 20px rgb(0 0 0 / 35%));
   }
 
   /* ----- Stats ----- */
@@ -1399,6 +1419,14 @@ const year = new Date().getFullYear();
 
     .hero-inner {
       grid-template-columns: 1fr;
+    }
+
+    .hero-visual {
+      order: -1;
+    }
+
+    .hero-logo {
+      width: 220px;
     }
 
     .hero-mii {
