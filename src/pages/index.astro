@@ -453,7 +453,7 @@ const year = new Date().getFullYear();
     <div class="container footer-grid">
       <div class="footer-about">
         <div class="footer-brand">
-          <img src="/brand/logo-mark-2x.png" srcset="/brand/logo-mark-1x.png 1x, /brand/logo-mark-2x.png 2x, /brand/logo-mark-3x.png 3x" alt="" width="113" height="72" loading="lazy" />
+          <Image src={logo} alt="" width={110} densities={[1, 2, 3]} quality={95} />
           <div>
             <strong>{company.name}</strong>
             <span>Since {company.since}</span>
@@ -1311,8 +1311,9 @@ const year = new Date().getFullYear();
   }
 
   .footer-brand img {
-    width: auto;
-    height: 72px;
+    width: 110px;
+    height: auto;
+    flex: none;
   }
 
   .footer-brand strong {
