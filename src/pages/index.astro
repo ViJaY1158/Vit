@@ -75,6 +75,7 @@ const year = new Date().getFullYear();
             fetchpriority="high"
             class="hero-logo"
           />
+          <span class="hero-logo-shadow" aria-hidden="true"></span>
         </div>
       </div>
     </section>
@@ -606,9 +607,45 @@ const year = new Date().getFullYear();
     justify-items: center;
   }
 
+  /* Gentle floating motion. Only transform/opacity animate, so it stays on the GPU. */
   .hero-logo {
     width: min(100%, 460px);
     height: auto;
+    animation: logo-float 5s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .hero-logo-shadow {
+    width: 55%;
+    height: 22px;
+    margin-top: 0.5rem;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(0 0 0 / 55%), transparent);
+    animation: logo-shadow 5s ease-in-out infinite;
+  }
+
+  @keyframes logo-float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+
+    50% {
+      transform: translate3d(0, -18px, 0) rotate(-1deg);
+    }
+  }
+
+  @keyframes logo-shadow {
+    0%,
+    100% {
+      transform: scaleX(1);
+      opacity: 0.9;
+    }
+
+    50% {
+      transform: scaleX(0.8);
+      opacity: 0.5;
+    }
   }
 
   .hero-copy {
