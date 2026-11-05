@@ -1,14 +1,20 @@
 ---
-import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
-import logo from '../assets/logo.png';
 import { company, nav } from '../data/site';
 ---
 
 <header class="site-header" data-header>
   <div class="container bar">
     <a href="#top" class="brand" aria-label={`${company.name} home`}>
-      <Image src={logo} alt="" width={64} densities={[1, 2, 3]} quality={95} loading="eager" class="brand-logo" />
+      <img
+        src="/brand/logo-mark-2x.png"
+        srcset="/brand/logo-mark-1x.png 1x, /brand/logo-mark-2x.png 2x, /brand/logo-mark-3x.png 3x"
+        alt=""
+        width="113"
+        height="72"
+        class="brand-logo"
+        fetchpriority="high"
+      />
       <span class="brand-text">
         <span class="brand-name">Vijay Innovation <span>Technology</span></span>
         <span class="brand-tag">{company.tagline}</span>
@@ -80,7 +86,7 @@ import { company, nav } from '../data/site';
 
   .brand-logo {
     width: auto;
-    height: 54px;
+    height: 72px;
     flex: none;
   }
 
@@ -208,6 +214,12 @@ import { company, nav } from '../data/site';
       font-size: 1.05rem;
       border-bottom: 1px solid var(--line);
       border-radius: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .brand-logo {
+      height: 56px;
     }
   }
 
