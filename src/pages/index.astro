@@ -18,7 +18,6 @@ import {
 } from '../data/site';
 
 import logo from '../assets/logo.png';
-import makeInIndia from '../assets/make-in-india.png';
 import aboutImg from '../assets/about-innovation.png';
 import rdx20 from '../assets/machine-rdx-20.png';
 import vl1200 from '../assets/machine-vl-1200.png';
@@ -75,14 +74,6 @@ const year = new Date().getFullYear();
             loading="eager"
             fetchpriority="high"
             class="hero-logo"
-          />
-          <Image
-            src={makeInIndia}
-            alt="Make in India"
-            widths={[180, 360]}
-            sizes="180px"
-            class="hero-mii"
-            loading="eager"
           />
         </div>
       </div>
@@ -471,7 +462,6 @@ const year = new Date().getFullYear();
           Committed to delivering products of global standards to various industrial segments with
           the vision of “Make in India”.
         </p>
-        <Image src={makeInIndia} alt="Make in India" width={150} class="footer-mii" />
       </div>
       <nav aria-label="Footer">
         <h3>Quick links</h3>
@@ -666,14 +656,6 @@ const year = new Date().getFullYear();
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-  }
-
-  .hero-mii {
-    position: absolute;
-    left: 0;
-    bottom: -1rem;
-    width: clamp(110px, 12vw, 160px);
-    height: auto;
   }
 
   /* ----- Stats ----- */
@@ -1307,12 +1289,6 @@ const year = new Date().getFullYear();
     font-size: 0.85rem;
   }
 
-  .footer-mii {
-    margin-top: 1.25rem;
-    width: 150px;
-    height: auto;
-  }
-
   .footer ul {
     display: grid;
     gap: 0.6rem;
@@ -1427,10 +1403,6 @@ const year = new Date().getFullYear();
 
     .hero-logo {
       width: 220px;
-    }
-
-    .hero-mii {
-      display: none;
     }
 
     .hero-actions .btn {
