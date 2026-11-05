@@ -62,19 +62,19 @@ const year = new Date().getFullYear();
       />
       <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="hero-kicker">
+          <p class="hero-kicker animate-in">
             <Icon name="lucide:badge-check" aria-hidden="true" /> ISO 9001:2015 certified · Since {
               company.since
             }
           </p>
-          <h1 id="hero-title">
+          <h1 id="hero-title" class="animate-in" style="--delay:120ms">
             Precision engineering, <span>made in India.</span>
           </h1>
-          <p class="hero-lead">
+          <p class="hero-lead animate-in" style="--delay:240ms">
             {company.name} delivers products of global standards to aerospace, telecom, power,
             medical and industrial customers, with the vision of “Make in India”.
           </p>
-          <div class="hero-actions">
+          <div class="hero-actions animate-in" style="--delay:360ms">
             <a href="#contact" class="btn btn--primary">
               Request a quote <Icon name="lucide:arrow-right" aria-hidden="true" />
             </a>
@@ -85,7 +85,8 @@ const year = new Date().getFullYear();
           src={makeInIndia}
           alt="Make in India"
           width={240}
-          class="hero-mii"
+          class="hero-mii animate-in"
+          style="--delay:480ms"
           loading="eager"
         />
       </div>
@@ -96,8 +97,8 @@ const year = new Date().getFullYear();
       <div class="container">
         <ul role="list" class="stats-grid">
           {
-            stats.map((s) => (
-              <li>
+            stats.map((s, i) => (
+              <li data-reveal style={`--delay:${i * 100}ms`}>
                 <strong>{s.value}</strong>
                 <span>{s.label}</span>
               </li>
@@ -110,7 +111,7 @@ const year = new Date().getFullYear();
     <!-- ===== About ===== -->
     <section id="about" class="section" aria-labelledby="about-title">
       <div class="container about">
-        <div class="about-media" data-reveal>
+        <div class="about-media" data-reveal="left">
           <Picture
             src={aboutImg}
             formats={['avif', 'webp']}
@@ -124,7 +125,7 @@ const year = new Date().getFullYear();
             <span>years of engineering</span>
           </div>
         </div>
-        <div class="about-copy" data-reveal>
+        <div class="about-copy" data-reveal="right">
           <p class="eyebrow">About us</p>
           <h2 id="about-title">Pioneering innovative solutions since {company.since}</h2>
           <p>
@@ -158,7 +159,7 @@ const year = new Date().getFullYear();
     <!-- ===== Quality policy ===== -->
     <section id="quality" class="section section--dark" aria-labelledby="quality-title">
       <div class="container">
-        <div class="section-head section-head--center">
+        <div class="section-head section-head--center" data-reveal>
           <p class="eyebrow">Quality policy</p>
           <h2 id="quality-title">Our commitment to excellence</h2>
           <p>Under commit, over deliver. Quality is built into every step of our operations.</p>
@@ -182,17 +183,17 @@ const year = new Date().getFullYear();
     <!-- ===== Vision & mission ===== -->
     <section id="vision-mission" class="section section--alt" aria-labelledby="vm-title">
       <div class="container">
-        <div class="section-head section-head--center">
+        <div class="section-head section-head--center" data-reveal>
           <p class="eyebrow">Vision &amp; mission</p>
           <h2 id="vm-title">The principles that drive us</h2>
         </div>
         <div class="vm-grid">
-          <article class="card vm-card" data-reveal>
+          <article class="card vm-card" data-reveal="left">
             <span class="icon-badge"><Icon name="lucide:eye" aria-hidden="true" /></span>
             <h3>Our vision</h3>
             <ul>{vision.map((v) => <li>{v}</li>)}</ul>
           </article>
-          <article class="card vm-card vm-card--gold" data-reveal style="--delay:100ms">
+          <article class="card vm-card vm-card--gold" data-reveal="right" style="--delay:100ms">
             <span class="icon-badge"><Icon name="lucide:rocket" aria-hidden="true" /></span>
             <h3>Our mission</h3>
             <ul>{mission.map((m) => <li>{m}</li>)}</ul>
@@ -204,7 +205,7 @@ const year = new Date().getFullYear();
     <!-- ===== Machines ===== -->
     <section id="machines" class="section" aria-labelledby="machines-title">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head" data-reveal>
           <p class="eyebrow">Our machines</p>
           <h2 id="machines-title">Advanced CNC capability for precision parts</h2>
           <p>Vertical machining centres with modern Siemens and Mitsubishi controls.</p>
@@ -244,7 +245,7 @@ const year = new Date().getFullYear();
     <!-- ===== Industries ===== -->
     <section id="industries" class="section section--alt" aria-labelledby="ind-title">
       <div class="container">
-        <div class="section-head section-head--center">
+        <div class="section-head section-head--center" data-reveal>
           <p class="eyebrow">Products &amp; segments</p>
           <h2 id="ind-title">Industries we serve</h2>
           <p>Delivering precision engineering solutions across diverse industries.</p>
@@ -252,7 +253,7 @@ const year = new Date().getFullYear();
         <ul role="list" class="industry-grid">
           {
             industries.map((s, i) => (
-              <li class="card industry" data-reveal style={`--delay:${i * 60}ms`}>
+              <li class="card industry" data-reveal="zoom" style={`--delay:${i * 80}ms`}>
                 <span class="icon-badge">
                   <Icon name={s.icon} aria-hidden="true" />
                 </span>
@@ -267,7 +268,7 @@ const year = new Date().getFullYear();
     <!-- ===== Process ===== -->
     <section id="process" class="section" aria-labelledby="process-title">
       <div class="container">
-        <div class="section-head process-head">
+        <div class="section-head process-head" data-reveal>
           <div>
             <p class="eyebrow">Our process</p>
             <h2 id="process-title">Quality at every stage</h2>
@@ -314,7 +315,7 @@ const year = new Date().getFullYear();
     <!-- ===== Certifications ===== -->
     <section id="certifications" class="section section--alt" aria-labelledby="cert-title">
       <div class="container">
-        <div class="section-head section-head--center">
+        <div class="section-head section-head--center" data-reveal>
           <p class="eyebrow">Certifications</p>
           <h2 id="cert-title">Standards that define our work</h2>
           <p>Tap a certificate to view it.</p>
@@ -377,7 +378,7 @@ const year = new Date().getFullYear();
     <!-- ===== Careers ===== -->
     <section id="careers" class="section" aria-labelledby="careers-title">
       <div class="container">
-        <div class="careers card" data-reveal>
+        <div class="careers card" data-reveal="zoom">
           <span class="icon-badge"><Icon name="lucide:briefcase" aria-hidden="true" /></span>
           <div>
             <p class="eyebrow">Careers</p>
@@ -397,7 +398,7 @@ const year = new Date().getFullYear();
     <!-- ===== Contact ===== -->
     <section id="contact" class="section section--dark" aria-labelledby="contact-title">
       <div class="container contact">
-        <div class="contact-info">
+        <div class="contact-info" data-reveal="left">
           <p class="eyebrow">Contact us</p>
           <h2 id="contact-title">Let's build your next part together</h2>
           <p class="contact-lead">
@@ -435,14 +436,25 @@ const year = new Date().getFullYear();
             </li>
           </ul>
         </div>
-        <div class="contact-form">
+        <div class="contact-form" data-reveal="right" data-form>
           <h3>Send us a message</h3>
-          <iframe
-            src={company.formUrl}
-            title="Contact form"
-            loading="lazy"
-            width="100%"
-            height="720"></iframe>
+          <p class="form-intro">
+            Share your drawing, quantity and timeline using our enquiry form, or reach us directly.
+          </p>
+          <button type="button" class="btn btn--primary form-open" data-form-open>
+            <Icon name="lucide:clipboard-list" aria-hidden="true" /> Open the enquiry form
+          </button>
+          <div class="form-alt">
+            <a class="btn btn--outline" href={company.phoneHref}>
+              <Icon name="lucide:phone" aria-hidden="true" /> Call us
+            </a>
+            <a class="btn btn--outline" href={`mailto:${company.email}`}>
+              <Icon name="lucide:mail" aria-hidden="true" /> Email us
+            </a>
+          </div>
+          <template data-form-tpl>
+            <iframe src={company.formUrl} title="Enquiry form" class="form-frame"></iframe>
+          </template>
         </div>
       </div>
     </section>
@@ -453,7 +465,7 @@ const year = new Date().getFullYear();
     <div class="container footer-grid">
       <div class="footer-about">
         <div class="footer-brand">
-          <Image src={logo} alt="" width={56} height={56} />
+          <Image src={logo} alt="" width={80} densities={[1, 2]} />
           <div>
             <strong>{company.name}</strong>
             <span>Since {company.since}</span>
@@ -518,6 +530,15 @@ const year = new Date().getFullYear();
   } else {
     items.forEach((el) => el.classList.add('is-visible'));
   }
+
+  // The Google Form is heavy, so it only loads when someone asks for it.
+  const formBox = document.querySelector<HTMLElement>('[data-form]');
+  formBox?.querySelector('[data-form-open]')?.addEventListener('click', () => {
+    const tpl = formBox.querySelector<HTMLTemplateElement>('[data-form-tpl]')!;
+    formBox.querySelectorAll('.form-intro, .form-open, .form-alt').forEach((el) => el.remove());
+    formBox.append(tpl.content.cloneNode(true));
+    formBox.classList.add('is-loaded');
+  });
 
   // Image viewers (certificates and process chart).
   document.querySelectorAll<HTMLElement>('[data-open]').forEach((btn) => {
@@ -1186,10 +1207,10 @@ const year = new Date().getFullYear();
   }
 
   .contact-form {
+    padding: clamp(1.25rem, 3vw, 2rem);
     background: #fff;
     color: var(--ink);
     border-radius: var(--radius);
-    padding: 1.25rem;
     box-shadow: var(--shadow);
   }
 
@@ -1198,9 +1219,25 @@ const year = new Date().getFullYear();
     padding: 0.25rem 0.25rem 0.75rem;
   }
 
-  .contact-form iframe {
+  .form-intro {
+    color: var(--ink-soft);
+    padding: 0 0.25rem 1.25rem;
+  }
+
+  .form-open {
     width: 100%;
-    height: 720px;
+  }
+
+  .form-alt {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .form-frame {
+    width: 100%;
+    height: 1250px;
     border: 0;
     border-radius: var(--radius-sm);
     background: var(--surface-alt);
@@ -1235,10 +1272,8 @@ const year = new Date().getFullYear();
   }
 
   .footer-brand img {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: #fff;
+    width: auto;
+    height: 64px;
   }
 
   .footer-brand strong {
@@ -1408,12 +1443,8 @@ const year = new Date().getFullYear();
       width: 100%;
     }
 
-    .contact-form {
-      padding: 0.75rem;
-    }
-
-    .contact-form iframe {
-      height: 820px;
+    .form-frame {
+      height: 1400px;
     }
 
     .footer-grid {
