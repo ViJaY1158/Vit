@@ -345,6 +345,11 @@ const year = new Date().getFullYear();
           <dialog id={`dlg-${c.id}`} class="viewer viewer--doc" aria-label={`${c.title} certificate`}>
             <form method="dialog" class="viewer-bar">
               <strong>{c.title}</strong>
+              {c.pdf && (
+                <a class="viewer-pdf" href={c.pdf} target="_blank" rel="noopener">
+                  <Icon name="lucide:file-check" aria-hidden="true" /> Download PDF
+                </a>
+              )}
               <button class="viewer-close" aria-label="Close">
                 <Icon name="lucide:x" aria-hidden="true" />
               </button>
@@ -1133,6 +1138,22 @@ const year = new Date().getFullYear();
     background: #fff;
     border-bottom: 1px solid var(--line);
     font-family: var(--font-head);
+  }
+
+  .viewer-pdf {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto;
+    margin-right: 0.75rem;
+    font: 600 0.9rem var(--font-body);
+    color: var(--blue-600);
+    text-decoration: none;
+  }
+
+  .viewer-pdf svg {
+    width: 18px;
+    height: 18px;
   }
 
   .viewer-close {

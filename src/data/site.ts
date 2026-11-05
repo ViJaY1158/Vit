@@ -176,13 +176,15 @@ export const certifications = [
   {
     id: 'iso',
     title: 'ISO 9001:2015',
-    text: 'Our Quality Management System is certified to ISO 9001:2015 standards, demonstrating our commitment to consistent quality and continuous improvement.',
+    text: 'Our Quality Management System is certified to ISO 9001:2015 by QRO Certification (certificate no. 305026081784Q), valid until 16 August 2029.',
     image: 'iso',
+    pdf: '/certificates/vit-iso-9001-2015.pdf',
   },
   {
     id: 'msme',
     title: 'MSME Registered',
     text: 'Registered with the Ministry of Micro, Small & Medium Enterprises, Government of India, recognizing our contribution to the manufacturing sector.',
     image: 'msme',
+    pdf: undefined,
   },
 ] as const;
