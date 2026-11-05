@@ -1,0 +1,1492 @@
+---
+import { Picture, Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import {
+  company,
+  nav,
+  stats,
+  aboutPoints,
+  qualityPolicy,
+  vision,
+  mission,
+  machines,
+  industries,
+  process,
+  certifications,
+} from '../data/site';
+
+import logo from '../assets/logo.png';
+import aboutImg from '../assets/about-innovation.png';
+import rdx20 from '../assets/machine-rdx-20.png';
+import vl1200 from '../assets/machine-vl-1200.png';
+import vl1050 from '../assets/machine-vl-1050.png';
+import processChart from '../assets/process-chart.png';
+import isoCert from '../assets/cert-iso-9001.jpg';
+import msmeCert from '../assets/cert-msme.jpg';
+
+const machineImages = { rdx20, vl1200, vl1050 };
+const certImages = { iso: isoCert, msme: msmeCert };
+
+const year = new Date().getFullYear();
+---
+
+<Base
+  title={`${company.name} | ${company.tagline}`}
+  description="ISO 9001:2015 certified precision engineering and CNC machining company in Bengaluru since 2003, serving aerospace, telecom, power, medical and machine guard segments."
+>
+  <div id="top" class="top-sentinel" aria-hidden="true"></div>
+  <Header />
+
+  <main id="main">
+    <!-- ===== Hero ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="hero-kicker animate-in">
+            <Icon name="lucide:badge-check" aria-hidden="true" /> ISO 9001:2015 certified · Since {
+              company.since
+            }
+          </p>
+          <h1 id="hero-title" class="animate-in" style="--delay:120ms">
+            Precision engineering, <span>made in India.</span>
+          </h1>
+          <p class="hero-lead animate-in" style="--delay:240ms">
+            {company.name} delivers products of global standards to aerospace, telecom, power,
+            medical and industrial customers, with the vision of “Make in India”.
+          </p>
+          <div class="hero-actions animate-in" style="--delay:360ms">
+            <a href="#contact" class="btn btn--primary">
+              Request a quote <Icon name="lucide:arrow-right" aria-hidden="true" />
+            </a>
+            <a href="#machines" class="btn btn--ghost">See our machines</a>
+          </div>
+        </div>
+        <div class="hero-visual animate-in" style="--delay:200ms">
+          <Image
+            src={logo}
+            alt={`${company.name} logo`}
+            widths={[320, 480, 640, 960]}
+            sizes="(max-width: 640px) 240px, (max-width: 1100px) 340px, 460px"
+            quality={95}
+            loading="eager"
+            fetchpriority="high"
+            class="hero-logo"
+          />
+          <span class="hero-logo-shadow" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Stats strip ===== -->
+    <section class="stats" aria-label="Company highlights">
+      <div class="container">
+        <ul role="list" class="stats-grid">
+          {
+            stats.map((s, i) => (
+              <li data-reveal style={`--delay:${i * 100}ms`}>
+                <strong>{s.value}</strong>
+                <span>{s.label}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="container about">
+        <div class="about-media" data-reveal="left">
+          <Picture
+            src={aboutImg}
+            formats={['avif', 'webp']}
+                    fallbackFormat="webp"
+            widths={[480, 800, 1200]}
+            sizes="(max-width: 900px) 100vw, 560px"
+            alt="Light bulbs labelled innovation, technology, vision and teamwork"
+          />
+          <div class="about-badge">
+            <strong>{year - company.since}+</strong>
+            <span>years of engineering</span>
+          </div>
+        </div>
+        <div class="about-copy" data-reveal="right">
+          <p class="eyebrow">About us</p>
+          <h2 id="about-title">Pioneering innovative solutions since {company.since}</h2>
+          <p>
+            VIJAY INNOVATION TECHNOLOGY, an ISO 9001:2015 certified company, has been in business
+            since {company.since}, run by a professionally managed group of experienced and aspiring
+            engineers.
+          </p>
+          <p>
+            Now, with the vision and objective of the “Make in India” concept, we are focusing on
+            delivering products of global standards to various industrial segments.
+          </p>
+          <ul role="list" class="about-points">
+            {
+              aboutPoints.map((p) => (
+                <li>
+                  <span class="icon-badge">
+                    <Icon name={p.icon} aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3>{p.title}</h3>
+                    <p>{p.text}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Quality policy ===== -->
+    <section id="quality" class="section section--dark" aria-labelledby="quality-title">
+      <div class="container">
+        <div class="section-head section-head--center" data-reveal>
+          <p class="eyebrow">Quality policy</p>
+          <h2 id="quality-title">Our commitment to excellence</h2>
+          <p>Under commit, over deliver. Quality is built into every step of our operations.</p>
+        </div>
+        <ul role="list" class="quality-grid">
+          {
+            qualityPolicy.map((q, i) => (
+              <li class="quality-card" data-reveal style={`--delay:${i * 80}ms`}>
+                <span class="icon-badge">
+                  <Icon name={q.icon} aria-hidden="true" />
+                </span>
+                <h3>{q.title}</h3>
+                <p>{q.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Vision & mission ===== -->
+    <section id="vision-mission" class="section section--alt" aria-labelledby="vm-title">
+      <div class="container">
+        <div class="section-head section-head--center" data-reveal>
+          <p class="eyebrow">Vision &amp; mission</p>
+          <h2 id="vm-title">The principles that drive us</h2>
+        </div>
+        <div class="vm-grid">
+          <article class="card vm-card" data-reveal="left">
+            <span class="icon-badge"><Icon name="lucide:eye" aria-hidden="true" /></span>
+            <h3>Our vision</h3>
+            <ul>{vision.map((v) => <li>{v}</li>)}</ul>
+          </article>
+          <article class="card vm-card vm-card--gold" data-reveal="right" style="--delay:100ms">
+            <span class="icon-badge"><Icon name="lucide:rocket" aria-hidden="true" /></span>
+            <h3>Our mission</h3>
+            <ul>{mission.map((m) => <li>{m}</li>)}</ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Machines ===== -->
+    <section id="machines" class="section" aria-labelledby="machines-title">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Our machines</p>
+          <h2 id="machines-title">Advanced CNC capability for precision parts</h2>
+          <p>Vertical machining centres with modern Siemens and Mitsubishi controls.</p>
+        </div>
+        <div class="machines-grid">
+          {
+            machines.map((m, i) => (
+              <article class="card machine" data-reveal style={`--delay:${i * 80}ms`}>
+                <div class="machine-media">
+                  <Picture
+                    src={machineImages[m.image]}
+                    formats={['avif', 'webp']}
+                    fallbackFormat="webp"
+                    widths={[400, 640, 900]}
+                    sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 380px"
+                    alt={`${m.name} vertical machining centre`}
+                  />
+                </div>
+                <div class="machine-body">
+                  <h3>{m.name}</h3>
+                  <dl>
+                    {m.specs.map(([k, v]) => (
+                      <div>
+                        <dt>{k}</dt>
+                        <dd>{v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Industries ===== -->
+    <section id="industries" class="section section--alt" aria-labelledby="ind-title">
+      <div class="container">
+        <div class="section-head section-head--center" data-reveal>
+          <p class="eyebrow">Products &amp; segments</p>
+          <h2 id="ind-title">Industries we serve</h2>
+          <p>Delivering precision engineering solutions across diverse industries.</p>
+        </div>
+        <ul role="list" class="industry-grid">
+          {
+            industries.map((s, i) => (
+              <li class="card industry" data-reveal="zoom" style={`--delay:${i * 80}ms`}>
+                <span class="icon-badge">
+                  <Icon name={s.icon} aria-hidden="true" />
+                </span>
+                <h3>{s.title}</h3>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Process ===== -->
+    <section id="process" class="section" aria-labelledby="process-title">
+      <div class="container">
+        <div class="section-head process-head" data-reveal>
+          <div>
+            <p class="eyebrow">Our process</p>
+            <h2 id="process-title">Quality at every stage</h2>
+            <p>A streamlined workflow from enquiry to delivery, with quality checks built in.</p>
+          </div>
+          <button class="btn btn--outline" type="button" data-open="dlg-process">
+            <Icon name="lucide:maximize-2" aria-hidden="true" /> View full process chart
+          </button>
+        </div>
+        <ol class="process-list">
+          {
+            process.map((p, i) => (
+              <li class="process-step" data-reveal style={`--delay:${i * 70}ms`}>
+                <span class="step-num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="icon-badge">
+                  <Icon name={p.icon} aria-hidden="true" />
+                </span>
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+      <dialog id="dlg-process" class="viewer" aria-label="Process flow chart">
+        <form method="dialog" class="viewer-bar">
+          <strong>Process flow chart</strong>
+          <button class="viewer-close" aria-label="Close">
+            <Icon name="lucide:x" aria-hidden="true" />
+          </button>
+        </form>
+        <Picture
+          src={processChart}
+          formats={['avif', 'webp']}
+                    fallbackFormat="webp"
+          widths={[640, 1152]}
+          sizes="(max-width: 1200px) 95vw, 1152px"
+          alt="Process flow chart: customer, OEM team, design, production, quality and purchase departments, inspection, quality check, delivery and feedback"
+          loading="lazy"
+        />
+      </dialog>
+    </section>
+
+    <!-- ===== Certifications ===== -->
+    <section id="certifications" class="section section--alt" aria-labelledby="cert-title">
+      <div class="container">
+        <div class="section-head section-head--center" data-reveal>
+          <p class="eyebrow">Certifications</p>
+          <h2 id="cert-title">Standards that define our work</h2>
+          <p>Tap a certificate to view it.</p>
+        </div>
+        <div class="cert-grid">
+          {
+            certifications.map((c, i) => (
+              <button
+                type="button"
+                class="card cert"
+                data-open={`dlg-${c.id}`}
+                data-reveal
+                style={`--delay:${i * 80}ms`}
+              >
+                <span class="cert-thumb">
+                  <Picture
+                    src={certImages[c.image]}
+                    formats={['avif', 'webp']}
+                    fallbackFormat="webp"
+                    widths={[240, 480]}
+                    sizes="200px"
+                    alt=""
+                  />
+                </span>
+                <span class="cert-body">
+                  <span class="cert-title">{c.title}</span>
+                  <span class="cert-text">{c.text}</span>
+                  <span class="cert-link">
+                    View certificate <Icon name="lucide:arrow-right" aria-hidden="true" />
+                  </span>
+                </span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+      {
+        certifications.map((c) => (
+          <dialog id={`dlg-${c.id}`} class="viewer viewer--doc" aria-label={`${c.title} certificate`}>
+            <form method="dialog" class="viewer-bar">
+              <strong>{c.title}</strong>
+              <button class="viewer-close" aria-label="Close">
+                <Icon name="lucide:x" aria-hidden="true" />
+              </button>
+            </form>
+            <Picture
+              src={certImages[c.image]}
+              formats={['avif', 'webp']}
+                    fallbackFormat="webp"
+              widths={[600, 1000, 1240]}
+              sizes="(max-width: 800px) 95vw, 760px"
+              alt={`${c.title} certificate of ${company.name}`}
+              loading="lazy"
+            />
+          </dialog>
+        ))
+      }
+    </section>
+
+    <!-- ===== Careers ===== -->
+    <section id="careers" class="section" aria-labelledby="careers-title">
+      <div class="container">
+        <div class="careers card" data-reveal="zoom">
+          <span class="icon-badge"><Icon name="lucide:briefcase" aria-hidden="true" /></span>
+          <div>
+            <p class="eyebrow">Careers</p>
+            <h2 id="careers-title">Join our team of innovative professionals</h2>
+            <p>
+              There are no open positions right now. We are always happy to hear from skilled
+              machinists, programmers and quality engineers, so feel free to send us your resume.
+            </p>
+          </div>
+          <a class="btn btn--blue" href={`mailto:${company.email}?subject=Job%20application`}>
+            <Icon name="lucide:mail" aria-hidden="true" /> Email your resume
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="section section--dark" aria-labelledby="contact-title">
+      <div class="container contact">
+        <div class="contact-info" data-reveal="left">
+          <p class="eyebrow">Contact us</p>
+          <h2 id="contact-title">Let's build your next part together</h2>
+          <p class="contact-lead">
+            We are located in Bengaluru, the heart of India's technology and manufacturing hub.
+            Send us your drawing or requirement and we'll get back to you.
+          </p>
+          <ul role="list" class="contact-list">
+            <li>
+              <span class="icon-badge"><Icon name="lucide:phone" aria-hidden="true" /></span>
+              <div>
+                <span class="label">Phone</span>
+                <a href={company.phoneHref}>{company.phone}</a>
+              </div>
+            </li>
+            <li>
+              <span class="icon-badge"><Icon name="lucide:mail" aria-hidden="true" /></span>
+              <div>
+                <span class="label">Email</span>
+                <a href={`mailto:${company.email}`}>{company.email}</a>
+              </div>
+            </li>
+            <li>
+              <span class="icon-badge"><Icon name="lucide:map-pin" aria-hidden="true" /></span>
+              <div>
+                <span class="label">Address</span>
+                <a href={company.mapsHref} target="_blank" rel="noopener">{company.address}</a>
+              </div>
+            </li>
+            <li>
+              <span class="icon-badge"><Icon name="lucide:clock" aria-hidden="true" /></span>
+              <div>
+                <span class="label">Working hours</span>
+                <span>{company.hours}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="contact-form" data-reveal="right" data-form>
+          <h3>Send us a message</h3>
+          <p class="form-intro">
+            Share your drawing, quantity and timeline using our enquiry form, or reach us directly.
+          </p>
+          <button type="button" class="btn btn--primary form-open" data-form-open>
+            <Icon name="lucide:clipboard-list" aria-hidden="true" /> Open the enquiry form
+          </button>
+          <div class="form-alt">
+            <a class="btn btn--outline" href={company.phoneHref}>
+              <Icon name="lucide:phone" aria-hidden="true" /> Call us
+            </a>
+            <a class="btn btn--outline" href={`mailto:${company.email}`}>
+              <Icon name="lucide:mail" aria-hidden="true" /> Email us
+            </a>
+          </div>
+          <template data-form-tpl>
+            <iframe src={company.formUrl} title="Enquiry form" class="form-frame"></iframe>
+          </template>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <div class="footer-brand">
+          <Image src={logo} alt="" width={110} densities={[1, 2, 3]} quality={95} />
+          <div>
+            <strong>{company.name}</strong>
+            <span>Since {company.since}</span>
+          </div>
+        </div>
+        <p>
+          Committed to delivering products of global standards to various industrial segments with
+          the vision of “Make in India”.
+        </p>
+      </div>
+      <nav aria-label="Footer">
+        <h3>Quick links</h3>
+        <ul role="list">
+          {
+            nav.map((n) => (
+              <li>
+                <a href={n.href}>{n.label}</a>
+              </li>
+            ))
+          }
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h3>Get in touch</h3>
+        <ul role="list" class="footer-contact">
+          <li><Icon name="lucide:map-pin" aria-hidden="true" /> {company.address}</li>
+          <li>
+            <Icon name="lucide:mail" aria-hidden="true" />
+            <a href={`mailto:${company.email}`}>{company.email}</a>
+          </li>
+          <li>
+            <Icon name="lucide:phone" aria-hidden="true" />
+            <a href={company.phoneHref}>{company.phone}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container copyright">
+      <p>© {year} {company.name}. All rights reserved.</p>
+    </div>
+  </footer>
+</Base>
+
+<script>
+  // Reveal sections as they scroll into view.
+  const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px' },
+    );
+    items.forEach((el) => io.observe(el));
+  } else {
+    items.forEach((el) => el.classList.add('is-visible'));
+  }
+
+  // The Google Form is heavy, so it only loads when someone asks for it.
+  const formBox = document.querySelector<HTMLElement>('[data-form]');
+  formBox?.querySelector('[data-form-open]')?.addEventListener('click', () => {
+    const tpl = formBox.querySelector<HTMLTemplateElement>('[data-form-tpl]')!;
+    formBox.querySelectorAll('.form-intro, .form-open, .form-alt').forEach((el) => el.remove());
+    formBox.append(tpl.content.cloneNode(true));
+    formBox.classList.add('is-loaded');
+  });
+
+  // Image viewers (certificates and process chart).
+  document.querySelectorAll<HTMLElement>('[data-open]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const dlg = document.getElementById(btn.dataset.open!) as HTMLDialogElement | null;
+      dlg?.showModal();
+    });
+  });
+  document.querySelectorAll<HTMLDialogElement>('dialog.viewer').forEach((dlg) => {
+    // Close when the backdrop is clicked.
+    dlg.addEventListener('click', (e) => {
+      if (e.target === dlg) dlg.close();
+    });
+  });
+</script>
+
+<style>
+  .top-sentinel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 40px;
+  }
+
+  /* ----- Hero ----- */
+  .hero {
+    position: relative;
+    isolation: isolate;
+    min-height: min(100svh, 860px);
+    display: flex;
+    align-items: center;
+    padding: calc(var(--header-h) + 3rem) 0 4rem;
+    color: #fff;
+    background: var(--navy-950);
+    overflow: hidden;
+  }
+
+  /* Engineering-drawing grid behind the hero, drawn with CSS (no image download). */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(900px 600px at 78% 45%, rgb(29 95 209 / 32%), transparent 65%),
+      radial-gradient(700px 500px at 0% 100%, rgb(212 160 23 / 10%), transparent 60%),
+      linear-gradient(160deg, #0b1f3a 0%, #071426 60%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgb(255 255 255 / 5%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 5%) 1px, transparent 1px),
+      linear-gradient(rgb(255 255 255 / 2.5%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 2.5%) 1px, transparent 1px);
+    background-size:
+      96px 96px,
+      96px 96px,
+      24px 24px,
+      24px 24px;
+    mask-image: radial-gradient(ellipse 80% 70% at 60% 45%, #000 30%, transparent 85%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 60% 45%, #000 30%, transparent 85%);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .hero-visual {
+    position: relative;
+    display: grid;
+    justify-items: center;
+  }
+
+  /* Gentle floating motion. Only transform/opacity animate, so it stays on the GPU. */
+  .hero-logo {
+    width: min(100%, 460px);
+    height: auto;
+    animation: logo-float 4s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .hero-logo-shadow {
+    width: 55%;
+    height: 22px;
+    margin-top: 0.5rem;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(0 0 0 / 55%), transparent);
+    animation: logo-shadow 4s ease-in-out infinite;
+  }
+
+  @keyframes logo-float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+
+    50% {
+      transform: translate3d(0, -30px, 0) rotate(-1.5deg);
+    }
+  }
+
+  @keyframes logo-shadow {
+    0%,
+    100% {
+      transform: scaleX(1);
+      opacity: 0.9;
+    }
+
+    50% {
+      transform: scaleX(0.7);
+      opacity: 0.5;
+    }
+  }
+
+  .hero-copy {
+    max-width: 720px;
+  }
+
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgb(255 255 255 / 22%);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 8%);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .hero-kicker svg {
+    width: 16px;
+    height: 16px;
+    color: var(--gold-400);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.3rem, 6.5vw, 4.4rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 span {
+    color: var(--gold-400);
+  }
+
+  .hero-lead {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: #d3dceb;
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* ----- Stats ----- */
+  .stats {
+    position: relative;
+    z-index: 2;
+    margin-top: -2.5rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .stats-grid li {
+    display: grid;
+    gap: 0.2rem;
+    padding: 1.4rem 1.5rem;
+    border-left: 1px solid var(--line);
+  }
+
+  .stats-grid li:first-child {
+    border-left: 0;
+  }
+
+  .stats-grid strong {
+    font-family: var(--font-head);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: var(--blue-600);
+    line-height: 1.1;
+  }
+
+  .stats-grid span {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  /* ----- About ----- */
+  .about {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+
+  .about-media {
+    position: relative;
+  }
+
+  .about-media img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .about-badge {
+    position: absolute;
+    right: -0.75rem;
+    bottom: -1.25rem;
+    display: grid;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    background: var(--gold-500);
+    color: var(--navy-950);
+    box-shadow: var(--shadow);
+    line-height: 1.2;
+  }
+
+  .about-badge strong {
+    font-family: var(--font-head);
+    font-size: 1.9rem;
+    font-weight: 800;
+  }
+
+  .about-badge span {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .about-copy h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .about-copy > p {
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+  }
+
+  .about-points {
+    display: grid;
+    gap: 1.1rem;
+    margin-top: 1.75rem;
+  }
+
+  .about-points li {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .about-points h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .about-points p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  /* ----- Quality ----- */
+  .quality-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  .quality-card {
+    padding: 1.75rem 1.5rem;
+    border-radius: var(--radius);
+    background: rgb(255 255 255 / 5%);
+    border: 1px solid rgb(255 255 255 / 12%);
+    transition:
+      background-color 0.25s,
+      border-color 0.25s,
+      transform 0.25s;
+  }
+
+  .quality-card:hover {
+    background: rgb(255 255 255 / 9%);
+    border-color: rgb(231 185 58 / 50%);
+  }
+
+  .quality-card .icon-badge {
+    background: rgb(231 185 58 / 15%);
+    color: var(--gold-400);
+    margin-bottom: 1.1rem;
+  }
+
+  .quality-card h3 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .quality-card p {
+    font-size: 0.95rem;
+    color: #b6c4d9;
+  }
+
+  /* ----- Vision & mission ----- */
+  .vm-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .vm-card {
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border-top: 4px solid var(--blue-600);
+  }
+
+  .vm-card--gold {
+    border-top-color: var(--gold-500);
+  }
+
+  .vm-card--gold .icon-badge {
+    background: #fdf6e3;
+    color: #a57a05;
+  }
+
+  .vm-card h3 {
+    font-size: 1.4rem;
+    margin: 1rem 0 0.75rem;
+  }
+
+  .vm-card ul {
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--ink-soft);
+  }
+
+  .vm-card li::marker {
+    color: var(--blue-600);
+  }
+
+  /* ----- Machines ----- */
+  .machines-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .machine {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition:
+      box-shadow 0.25s,
+      transform 0.25s;
+  }
+
+  .machine:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-3px);
+  }
+
+  .machine-media {
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .machine-media img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+    padding: 0.75rem;
+  }
+
+  .machine-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .machine-body h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .machine dl > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 0.92rem;
+  }
+
+  .machine dl > div:last-child {
+    border-bottom: 0;
+  }
+
+  .machine dt {
+    color: var(--ink-soft);
+  }
+
+  .machine dd {
+    font-weight: 600;
+    text-align: right;
+  }
+
+  /* ----- Industries ----- */
+  .industry-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .industry {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.4rem 1.5rem;
+    transition:
+      border-color 0.25s,
+      box-shadow 0.25s;
+  }
+
+  .industry:hover {
+    border-color: var(--blue-600);
+    box-shadow: var(--shadow);
+  }
+
+  .industry h3 {
+    font-size: 1.1rem;
+  }
+
+  /* ----- Process ----- */
+  .process-head {
+    max-width: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .process-head > div {
+    max-width: 640px;
+  }
+
+  .process-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    counter-reset: step;
+  }
+
+  .process-step {
+    position: relative;
+    padding: 1.6rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .step-num {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.3rem;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: #dbe3ef;
+  }
+
+  .process-step h3 {
+    font-size: 1.1rem;
+    margin: 1rem 0 0.4rem;
+  }
+
+  .process-step p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  /* ----- Certifications ----- */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 960px;
+    margin-inline: auto;
+  }
+
+  .cert {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      border-color 0.25s,
+      box-shadow 0.25s;
+  }
+
+  .cert:hover {
+    border-color: var(--blue-600);
+    box-shadow: var(--shadow);
+  }
+
+  .cert-thumb {
+    flex: none;
+    width: 110px;
+  }
+
+  .cert-thumb img {
+    width: 110px;
+    aspect-ratio: 1240 / 1754;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+  }
+
+  .cert-body {
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+  }
+
+  .cert-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .cert-text {
+    font-size: 0.93rem;
+    color: var(--ink-soft);
+  }
+
+  .cert-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.25rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--blue-600);
+  }
+
+  .cert-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* ----- Viewer dialog ----- */
+  .viewer {
+    margin: auto;
+    width: min(1180px, 95vw);
+    max-height: 92dvh;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius);
+    box-shadow: 0 30px 80px rgb(0 0 0 / 40%);
+    overflow: auto;
+  }
+
+  .viewer--doc {
+    width: min(780px, 95vw);
+  }
+
+  .viewer::backdrop {
+    background: rgb(7 20 38 / 75%);
+  }
+
+  .viewer-bar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0.75rem 0.75rem 1.25rem;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-head);
+  }
+
+  .viewer-close {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--surface-alt);
+    cursor: pointer;
+  }
+
+  .viewer-close svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .viewer img {
+    width: 100%;
+    background: #fff;
+  }
+
+  /* ----- Careers ----- */
+  .careers {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.5rem 2rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    background: linear-gradient(120deg, var(--blue-50), #fff 60%);
+  }
+
+  .careers .icon-badge {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+  }
+
+  .careers .icon-badge svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .careers h2 {
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+
+  .careers p:not(.eyebrow) {
+    color: var(--ink-soft);
+  }
+
+  .careers .eyebrow {
+    margin-bottom: 0.4rem;
+  }
+
+  /* ----- Contact ----- */
+  .contact {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .contact h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .contact-lead {
+    color: #b6c4d9;
+    margin-bottom: 2rem;
+  }
+
+  .contact-list {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .contact-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .contact-list .icon-badge {
+    background: rgb(231 185 58 / 15%);
+    color: var(--gold-400);
+  }
+
+  .contact-list .label {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8fa3c0;
+  }
+
+  .contact-list a {
+    color: #fff;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-list a:hover {
+    color: var(--gold-400);
+    text-decoration: underline;
+  }
+
+  .contact-form {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    background: #fff;
+    color: var(--ink);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .contact-form h3 {
+    font-size: 1.25rem;
+    padding: 0.25rem 0.25rem 0.75rem;
+  }
+
+  .form-intro {
+    color: var(--ink-soft);
+    padding: 0 0.25rem 1.25rem;
+  }
+
+  .form-open {
+    width: 100%;
+  }
+
+  .form-alt {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .form-frame {
+    width: 100%;
+    height: 1250px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: var(--surface-alt);
+  }
+
+  /* ----- Footer ----- */
+  .footer {
+    background: var(--navy-950);
+    color: #a9b8cf;
+    padding-top: 4rem;
+    font-size: 0.95rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.2fr;
+    gap: 2.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .footer h3 {
+    color: #fff;
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand img {
+    width: 110px;
+    height: auto;
+    flex: none;
+  }
+
+  .footer-brand strong {
+    display: block;
+    color: #fff;
+    font-family: var(--font-head);
+    font-size: 1.05rem;
+  }
+
+  .footer-brand span {
+    font-size: 0.85rem;
+  }
+
+  .footer ul {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .footer a {
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    color: var(--gold-400);
+  }
+
+  .footer-contact li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+
+  .footer-contact svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    margin-top: 0.2rem;
+    color: var(--gold-400);
+  }
+
+  .copyright {
+    padding-block: 1.5rem;
+    border-top: 1px solid rgb(255 255 255 / 10%);
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  /* ----- Responsive ----- */
+  @media (max-width: 1100px) {
+    .quality-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .machines-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .process-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .about,
+    .contact {
+      grid-template-columns: 1fr;
+    }
+
+    .about-media {
+      max-width: 620px;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid li:nth-child(3) {
+      border-left: 0;
+    }
+
+    .stats-grid li:nth-child(n + 3) {
+      border-top: 1px solid var(--line);
+    }
+
+    .industry-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cert-grid,
+    .vm-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .careers {
+      grid-template-columns: auto 1fr;
+    }
+
+    .careers .btn {
+      grid-column: 1 / -1;
+      justify-self: start;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-about {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      min-height: auto;
+      padding-bottom: 5rem;
+    }
+
+    .hero-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-visual {
+      order: -1;
+    }
+
+    .hero-logo {
+      width: 220px;
+    }
+
+    .hero-actions .btn {
+      flex: 1 1 100%;
+    }
+
+    .stats-grid li {
+      padding: 1.1rem 1rem;
+    }
+
+    .quality-grid,
+    .machines-grid,
+    .process-list,
+    .industry-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-badge {
+      right: 0.75rem;
+    }
+
+    .cert {
+      flex-direction: column;
+    }
+
+    .cert-thumb,
+    .cert-thumb img {
+      width: 100%;
+      max-height: 220px;
+      object-position: top;
+    }
+
+    .careers {
+      grid-template-columns: 1fr;
+    }
+
+    .careers .btn {
+      width: 100%;
+    }
+
+    .form-frame {
+      height: 1400px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

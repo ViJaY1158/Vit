@@ -1,0 +1,242 @@
+---
+import { Icon } from 'astro-icon/components';
+import { company, nav } from '../data/site';
+---
+
+<header class="site-header" data-header>
+  <div class="container bar">
+    <a href="#top" class="brand" aria-label={`${company.name} home`}>
+      <span class="brand-text">
+        <span class="brand-name">Vijay Innovation <span>Technology</span></span>
+        <span class="brand-tag">{company.tagline}</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul role="list">
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <a href="#contact" class="btn btn--primary nav-cta">Contact us</a>
+    </nav>
+
+    <button
+      class="menu-btn"
+      type="button"
+      aria-controls="site-nav"
+      aria-expanded="false"
+      data-menu-btn
+    >
+      <span class="sr-only">Open menu</span>
+      <Icon name="lucide:menu" class="i-open" aria-hidden="true" />
+      <Icon name="lucide:x" class="i-close" aria-hidden="true" />
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    height: var(--header-h);
+    color: #fff;
+    transition:
+      background-color 0.25s,
+      box-shadow 0.25s,
+      color 0.25s;
+  }
+
+  .site-header.is-scrolled,
+  .site-header.is-open {
+    background: #fff;
+    color: var(--ink);
+    box-shadow: 0 1px 0 var(--line), 0 6px 20px -12px rgb(15 23 42 / 25%);
+  }
+
+  .bar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    min-width: 0;
+  }
+
+  .brand-text {
+    display: grid;
+    gap: 0.35rem;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .brand-name {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1.15rem;
+    white-space: nowrap;
+  }
+
+  .brand-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    white-space: nowrap;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .nav ul {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .nav ul a {
+    display: block;
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    font-size: 0.93rem;
+    font-weight: 500;
+    text-decoration: none;
+    opacity: 0.9;
+    transition:
+      background-color 0.2s,
+      opacity 0.2s;
+  }
+
+  .nav ul a:hover {
+    opacity: 1;
+    background: rgb(127 127 127 / 12%);
+  }
+
+  .nav-cta {
+    min-height: 42px;
+    padding-inline: 1.1rem;
+  }
+
+  .menu-btn {
+    display: none;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .menu-btn svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .menu-btn .i-close,
+  .is-open .menu-btn .i-open {
+    display: none;
+  }
+
+  .is-open .menu-btn .i-close {
+    display: block;
+  }
+
+  @media (max-width: 1080px) {
+    .menu-btn {
+      display: grid;
+    }
+
+    .nav {
+      position: fixed;
+      inset: var(--header-h) 0 auto;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+      padding: 1rem var(--gutter) 1.5rem;
+      background: #fff;
+      color: var(--ink);
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      max-height: calc(100dvh - var(--header-h));
+      overflow-y: auto;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition:
+        opacity 0.2s,
+        transform 0.2s,
+        visibility 0.2s;
+    }
+
+    .is-open .nav {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+    }
+
+    .nav ul {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .nav ul a {
+      padding: 0.85rem 0.5rem;
+      font-size: 1.05rem;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .brand-tag {
+      display: none;
+    }
+
+    .brand-name {
+      font-size: 1rem;
+    }
+
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]')!;
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]')!;
+  const label = btn.querySelector('.sr-only')!;
+
+  // Solid header once the hero is scrolled past (no scroll listener needed).
+  const sentinel = document.getElementById('top');
+  if (sentinel) {
+    new IntersectionObserver(([entry]) => {
+      header.classList.toggle('is-scrolled', !entry.isIntersecting);
+    }).observe(sentinel);
+  }
+
+  const setOpen = (open: boolean) => {
+    header.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    label.textContent = open ? 'Close menu' : 'Open menu';
+  };
+
+  btn.addEventListener('click', () => setOpen(!header.classList.contains('is-open')));
+  header.querySelectorAll('.nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+</script>
