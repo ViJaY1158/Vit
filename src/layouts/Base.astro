@@ -1,0 +1,69 @@
+---
+import '@fontsource-variable/inter/wght.css';
+import '@fontsource-variable/montserrat/wght.css';
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import logo from '../assets/logo.png';
+import { company } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const favicon = await getImage({ src: logo, width: 64, height: 64, format: 'png' });
+const appleIcon = await getImage({ src: logo, width: 180, height: 180, format: 'png' });
+const ogImage = await getImage({ src: logo, width: 500, height: 500, format: 'png' });
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b1f3a" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href={favicon.src} />
+    <link rel="apple-touch-icon" href={appleIcon.src} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage.src, Astro.site)} />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://images.unsplash.com" />
+
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: company.name,
+        foundingDate: String(company.since),
+        email: company.email,
+        telephone: company.phone,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: company.address,
+          addressLocality: 'Bengaluru',
+          postalCode: '560058',
+          addressCountry: 'IN',
+        },
+      })}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>
